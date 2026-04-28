@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>「瘦下来」AI 减脂助手 - 2026 WAIC 创新大赛参赛项目</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #f5f6fa; color: #333; line-height: 1.6; }
+    
+    .hero {
+      background: linear-gradient(135deg, #4CAF82 0%, #2e8b57 100%);
+      padding: 60px 20px 80px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #f5f6fa;
+      border-radius: 50% 50% 0 0;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 12px; }
+    .hero p { font-size: 16px; opacity: 0.95; max-width: 500px; margin: 0 auto; }
+    .hero-logo { font-size: 72px; margin-bottom: 20px; }
+    
+    .container { max-width: 800px; margin: 0 auto; padding: 40px 20px 80px; }
+    
+    .section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #4CAF82;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .highlight-box {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .highlight-box h3 { color: #2e7d32; margin-bottom: 10px; font-size: 16px; }
+    .highlight-box p { color: #388e3c; font-size: 14px; }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .feature-card {
+      background: #f8faf8;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid #e0e0e0;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(76, 175, 130, 0.15);
+    }
+    .feature-icon { font-size: 40px; margin-bottom: 12px; }
+    .feature-card h4 { font-size: 15px; color: #333; margin-bottom: 8px; }
+    .feature-card p { font-size: 13px; color: #666; line-height: 1.5; }
+    
+    .problem-solution {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .problem, .solution {
+      padding: 20px;
+      border-radius: 12px;
+    }
+    .problem {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+    }
+    .solution {
+      background: #e8f5e9;
+      border-left: 4px solid #4caf50;
+    }
+    .problem h4, .solution h4 {
+      font-size: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .problem h4 { color: #e65100; }
+    .solution h4 { color: #2e7d32; }
+    .problem ul, .solution ul {
+      font-size: 13px;
+      padding-left: 20px;
+    }
+    .problem li, .solution li { margin-bottom: 8px; }
+    
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tech-tag {
+      background: #e3f2fd;
+      color: #1565c0;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+    
+    .team-section {
+      background: linear-gradient(135deg, #4CAF82 0%, #2e8b57 100%);
+      color: #fff;
+    }
+    .team-section .section-title { color: #fff; }
+    .team-member {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255,255,255,0.15);
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+    .team-avatar {
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+    .team-info h4 { font-size: 16px; margin-bottom: 4px; }
+    .team-info p { font-size: 13px; opacity: 0.9; }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .btn-primary {
+      background: #4CAF82;
+      color: #fff;
+    }
+    .btn-secondary {
+      background: #fff;
+      color: #4CAF82;
+      border: 2px solid #4CAF82;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #999;
+      font-size: 13px;
+    }
+    
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 15px;
+      background: #f8faf8;
+      border-radius: 12px;
+    }
+    .stat-value { font-size: 28px; font-weight: 800; color: #4CAF82; }
+    .stat-label { font-size: 12px; color: #888; margin-top: 4px; }
+    
+    @media (max-width: 600px) {
+      .problem-solution { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-badge">🏆 2026 WAIC Futuretech OPC 创新赛参赛项目</div>
+    <div class="hero-logo">🥗</div>
+    <h1>「瘦下来」AI 减脂助手</h1>
+    <p>让减脂变得科学、有趣、可持续 — AI驱动的个性化减脂陪伴小程序</p>
+  </section>
+  
+  <div class="container">
+    
+    <!-- 项目亮点 -->
+    <section class="section">
+      <h2 class="section-title">✨ 项目亮点</h2>
+      <div class="highlight-box">
+        <h3>一句话介绍</h3>
+        <p>基于 AI 大模型的智能减脂助手，为每位用户打造个性化、可执行的减脂方案，让减肥不再靠意志力。</p>
+      </div>
+      
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-value">4</div>
+          <div class="stat-label">核心功能模块</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">1人</div>
+          <div class="stat-label">独立开发团队</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">¥0</div>
+          <div class="stat-label">API调用成本</div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 核心功能 -->
+    <section class="section">
+      <h2 class="section-title">🎯 核心功能</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📸</div>
+          <h4>拍照识别食物</h4>
+          <p>上传餐食照片，AI 自动识别食物种类、计算热量与营养成分，智能分析饮食结构</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎬</div>
+          <h4>自定义运动视频库</h4>
+          <p>收藏、整理个人喜欢的运动跟练视频，打造专属健身计划，随时随地跟练</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h4>平台期心理疏导</h4>
+          <p>减脂遇到瓶颈？AI 智能分析原因，提供科学解释与心理支持，陪你度过平台期</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h4>AI 个性化方案</h4>
+          <p>根据身体数据、饮食习惯、运动偏好，每天生成定制化三餐 + 运动建议</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 问题与解决方案 -->
+    <section class="section">
+      <h2 class="section-title">💡 问题与解决方案</h2>
+      <div class="problem-solution">
+        <div class="problem">
+          <h4>❌ 传统减脂痛点</h4>
+          <ul>
+            <li>热量计算麻烦，难以坚持</li>
+            <li>方案千篇一律，不适合自己</li>
+            <li>平台期焦虑，容易放弃</li>
+            <li>运动视频分散，难以坚持跟练</li>
+          </ul>
+        </div>
+        <div class="solution">
+          <h4>✅ 「瘦下来」解决方案</h4>
+          <ul>
+            <li>拍照即识别，3秒知道热量</li>
+            <li>AI 量身定制，贴合个人生活</li>
+            <li>24h 心理陪伴，科学度过平台期</li>
+            <li>视频统一管理，形成运动习惯</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 技术架构 -->
+    <section class="section">
+      <h2 class="section-title">⚙️ 技术架构</h2>
+      <div class="tech-stack">
+        <span class="tech-tag">🤖 腾讯混元大模型</span>
+        <span class="tech-tag">☁️ 腾讯云服务器</span>
+        <span class="tech-tag">📱 微信小程序</span>
+        <span class="tech-tag">🐍 Python / FastAPI</span>
+        <span class="tech-tag">🗄️ SQLite 数据库</span>
+        <span class="tech-tag">🎨 原生前端</span>
+      </div>
+      <p style="margin-top: 16px; font-size: 14px; color: #666;">
+        低成本快速迭代：API 调用成本接近 ¥0，后端部署至腾讯云轻量服务器，年费用约 ¥300
+      </p>
+    </section>
+    
+    <!-- 创新点 -->
+    <section class="section">
+      <h2 class="section-title">🚀 创新点</h2>
+      <ul style="font-size: 14px; line-height: 2;">
+        <li>✅ <strong>AI 视觉识别</strong> — 拍照即识别，告别手动记录</li>
+        <li>✅ <strong>个性化方案引擎</strong> — 基于用户数据动态生成，每天更新</li>
+        <li>✅ <strong>平台期心理陪伴</strong> — 填补减脂 Apps 情感支持空白</li>
+        <li>✅ <strong>运动视频中心</strong> — 用户主导，建立可持续运动习惯</li>
+        <li>✅ <strong>极低成本</strong> — 个人独立开发，适合创业比赛快速验证</li>
+      </ul>
+    </section>
+    
+    <!-- 团队介绍 -->
+    <section class="section team-section">
+      <h2 class="section-title">👤 团队介绍</h2>
+      <div class="team-member">
+        <div class="team-avatar">👨‍💻</div>
+        <div class="team-info">
+          <h4>独立开发者</h4>
+          <p>IT 技术背景 · 亲身减脂经历 · 全栈独立开发</p>
+          <p style="margin-top: 8px; font-size: 12px; opacity: 0.8;">
+            产品策划 / UI设计 / 前端开发 / 后端架构 / AI能力接入
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 行动召唤 -->
+    <section class="section" style="text-align: center;">
+      <h2 class="section-title" style="justify-content: center;">🌟 加入我们</h2>
+      <p style="font-size: 15px; color: #666; margin-bottom: 20px;">
+        「瘦下来」致力于让每一位用户都能科学、轻松地实现减脂目标
+      </p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary">🚀 体验 Demo</a>
+        <a href="#" class="btn btn-secondary">📧 联系我们</a>
+      </div>
+    </section>
+    
+  </div>
+  
+  <footer class="footer">
+    <p>「瘦下来」AI 减脂助手 · 2026 WAIC Futuretech OPC 创新赛</p>
+    <p style="margin-top: 8px;">Made with ❤️ for a healthier life</p>
+  </footer>
+  
+</body>
+</html>
